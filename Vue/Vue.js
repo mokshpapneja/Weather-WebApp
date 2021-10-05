@@ -1,3 +1,27 @@
+//Firebase
+
+// Import the functions you need from the SDKs you need
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3LwXQNGNhGkLYh2VoIwVC34Jwf1sWGvQ",
+            authDomain: "weather-1st-project.firebaseapp.com",
+            databaseURL: "https://weather-1st-project-default-rtdb.firebaseio.com",
+            projectId: "weather-1st-project",
+            storageBucket: "weather-1st-project.appspot.com",
+            messagingSenderId: "1092620364426",
+            appId: "1:1092620364426:web:27b22eae506f8f8f325b73"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+const rootref = database.ref("users");
+
+
+
+
 
 
 //Date,Day Rendering
@@ -27,6 +51,8 @@ var icon1=document.querySelector('body > div.container > div.rightbox > div.next
 let climatevalue="";
 const weathermap =new Map([["Clouds",'cloud'],["Mist",'cloud-rain'],["Sunny",'sun'],["Clear",'sun'],["Haze",'cloud-meatball'],["Smoke",'smog'],["Wind",'wind'],["Rain",'cloud-showers-heavy'],['Drizzle','cloud-rain'],['Thunderstorm','cloud-showers-heavy']]);
 
+var lochistor="";
+var histor = "";
 
 let app=Vue.createApp({
     data:function(){
@@ -43,8 +69,6 @@ let app=Vue.createApp({
         Day2:arr1[(today.getDay()+2)%7].slice(0,3),
         Day3:arr1[(today.getDay()+3)%7].slice(0,3),
         City:"Mumbai",
-        histor:' ',
-        lochistor:' '
         }
 
     },
@@ -66,8 +90,8 @@ let app=Vue.createApp({
         this.ppt=pptvalue;
         this.humid=humidvalue;
         this.wind=windvalue;
-        this.histor=this.histor+`${namevalue} `;
-        console.log(this.histor);
+        histor=histor+this.Locations.split(",")[0]+" ";
+        console.log(histor);
         console.log(weathermap.get(climatevalue));
         document.querySelector("body > div > div.container > div.leftbox > div.down > i").setAttribute("class","fas fa-"+weathermap.get(climatevalue)+" fa-4x");
         document.querySelector("body > div > div.container > div.rightbox > div.nextdays > ul > li:nth-child(1) > i").setAttribute("class",`fas fa-${weathermap.get(climatevalue)} fa-2x`);}).catch(err => {alert('Wrong city name!')});
@@ -103,8 +127,8 @@ let app=Vue.createApp({
                         this.humid=humidvalue;
                         this.wind=windvalue;
                         console.log(this.Locations);
-                        this.lochistor=this.lochistor+`${namevalue} `;
-                        console.log(this.lochistor);
+                        lochistor=lochistor+this.Locations.split(",")[0]+" ";
+                        console.log(lochistor);
                         document.querySelector("body > div > div.container > div.leftbox > div.down > i").setAttribute("class","fas fa-"+weathermap.get(climatevalue)+" fa-4x");
                         document.querySelector("body > div > div.container > div.rightbox > div.nextdays > ul > li:nth-child(1) > i").setAttribute("class",`fas fa-${weathermap.get(climatevalue)} fa-2x`);
                     }
@@ -113,13 +137,48 @@ let app=Vue.createApp({
             },
         error(){
             alert("Location cannot be accessed.")
-        }
+        },
+        getHistory(){
+            rootref.once("value",function(snapshot){
+                if(users==" "){alert("Please Sign-up thorugh your BITS google account.")}
+                else{
+                    var present=0;
+                    var data =snapshot.val();
+                    for(let i in data){
+                        if(data[i]["Name"]==users){
+                            present=1;
+                            console.log(data[i]["CityHis"],data[i]["LocHis"]);
+                            userref=database.ref("users/"+users);
+                            userref.set({
+                                Name:users,
+                                CityHis:data[i]["CityHis"]+histor,
+                                LocHis:data[i]["LocHis"]+lochistor,
+                            });
+                            document.querySelector(".cityhistory").innerHTML=data[i]["CityHis"]+histor;
+                            document.querySelector(".locationhistory").innerHTML=data[i]["LocHis"]+lochistor;
+                            histor=lochistor="";
+                            
+                            break;
+                        }
+                    }
+                    if(present==0){
+                        rootref.ref(users).set({
+                            Name:users,
+                            CityHis:histor,
+                            LocHis:lochistor,
+                        });
+                    }
+                }
+            })
         }
     }
-)
+})
 
 
 app.mount(".Main");
+
+
+
 
 
 
@@ -147,7 +206,6 @@ function onSignIn(googleUser) {
     document.getElementById("username").innerHTML="Hi, "+profile.getName()+" !";
     users=profile.getName();
 }
-
 
 
 

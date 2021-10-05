@@ -18,7 +18,6 @@
     <header>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <div id="username">Hello,world</div>
-        <div></div><button>Get history</button>
     </header>
     
     <div class="input">
@@ -79,9 +78,11 @@
         </div>
     </div>
     <div  id="hist">
-       <div>History</div>
-       <div id="his"></div>
+        <button @click="getHistory">HISTORY</button>
+       <div id="Cityhis">City History: <span class="cityhistory"></span></div>
+       <div id="Lochis">Location History: <span class="locationhistory"></span></div>
     </div>
+
 </div>
     <script src="https://unpkg.com/vue@next"></script>
 
