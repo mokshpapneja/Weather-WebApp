@@ -1,0 +1,222 @@
+body{
+    background: #343d4b;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 10em;
+    font-family: 'Montserrat', sans-serif;
+
+}
+div{
+    display: block;
+}
+.container{
+    border-radius: 25px;
+    margin: auto;
+    background-color: #222831;
+    height: 402px;
+    width: fit-content;
+}
+.leftbox{
+    position: relative;
+    float: left;
+    height: 100%;
+    border-radius: 25px;
+    background-image:linear-gradient(135deg,rgb(25, 218, 208) 20%,rgba(33, 10, 243, 0.788) 80%), url(https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80);
+    width: 300px;
+    flex: auto;
+}
+.rightbox{
+    float: left;
+    position: relative;
+    width: 300px;
+    height: 100%;
+    justify-content: middle;
+    text-align: center;
+}
+ul{
+    list-style-type: none;
+}
+.leftbox {
+    color: #fff;
+    position: relative;
+    size: 110%;
+}
+.leftbox:hover{
+    transform: translateZ(0) scale(1.05) perspective(1000px);
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+.nextdays div{
+    position: relative;
+    float: left;
+}
+.top {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
+.day,.date,.location{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.date,.location{
+    font-size: 80%;
+    font-weight: lighter;
+}
+.down {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+}
+.climate,.temp{
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+.info{
+    color: white;
+}
+.info ul{
+    display: block;
+    height: 50px;
+    padding: 20px;
+}
+.info ul li{
+    margin: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nextdays{
+    position: absolute;
+    bottom: 100px;
+    left:1.8em;
+    display: flex;
+    width: 80%;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    background: #262e3b;
+}
+.nextdays ul{
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+    width: max-content;
+    border-radius:15px ;
+    padding-left:15px;
+    padding-right: 15px;
+    margin: 0%;
+}
+.nextdays ul li{
+    height: inherit;
+    float:left;
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+    transition-property: color,background-colour,padding;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.5s;
+
+}
+.nextdays ul li:hover {
+    background-color: #fff;
+    color: #222831;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+.temps{
+    font-size: 110%;
+}
+.location1{
+    position: absolute;
+    bottom: 25px;
+    align-self: center;
+    width: inherit;
+    height: min-content;
+}
+.location1 button{
+    padding: 7px;
+    font-weight: bold;
+    color: #fff;
+    width: 80%;
+    margin-left: 23px;
+    border-radius: 16.2px;
+    background-image:linear-gradient(135deg,rgb(110, 223, 217) 10%,rgba(55, 38, 206, 0.788) 80%)   ;
+}
+div.input{
+    position:relative;
+    bottom: 4em;
+    display: flex;
+    justify-content: center;
+}
+#hist button{
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    background-image: linear-gradient(45deg,rgb(59, 138, 63) 10%,rgba(6, 95, 53, 0.788) 80%);
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 10px;
+    height: min-content;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+[v-cloak]{
+    display: none;
+}
+#hist{
+    background-color: #4b1f03;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    margin-top: 2em;
+    background-image: linear-gradient(45deg,rgb(119, 58, 1) 10%,rgba(95, 54, 6, 0.788) 80%),url("https://s3.envato.com/files/247886244/DSC09095.jpg");
+}
+.histories{
+    padding: 1em;
+}
+#Cityhis{
+    color: rgb(250, 124, 7);
+}
+#Lochis{
+    color: rgb(250, 124, 7);
+}
+header{
+    background-image:linear-gradient(45deg,rgb(55, 4, 112) 10%,rgba(115, 5, 129,0.5)50%), url("https://i0.wp.com/coverfiles.alphacoders.com/463/46349.jpg?w=1200");
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 0px;
+}
+#username{
+    margin: 1em;
+    position: absolute;
+    right: 2em;
+    color: #fff;
+    font-family: cursive;
+    font-size: large;
+
+}
+.g-signin2{
+    margin: 1em;
+}
+
+#geocoder {
+    z-index: 1;
+    margin: 20px;
+    }
+    .mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+    }
